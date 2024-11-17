@@ -1,59 +1,39 @@
 package ru.ilukhinayana.hw7._Main;
 
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.HashMap;
 
-// 2. Задачка на Stack. Задачка: Проверка правильности скобочной последовательности
-//Описание задачи: Написать программу, которая будет проверять правильность скобочной последовательности. Дана СТРОКА,
-// содержащая только символы скобок: '(', ')', '[', ']', '{' и '}'. Необходимо проверить, что скобочная последова-
-// тельность верна, т.е. каждая открывающая скобка имеет соответствующую закрывающую скобку, и пары скобок правильно
-// вложены друг в друга.
-//Примеры:
-//"([)]" - неправильная скобочная последовательность
-//"()[]{}" - правильная скобочная последовательность
-//"()" - правильная скобочная последовательность
-//Мы используем стек, чтобы проверить правильность скобочной последовательности. Если мы встречаем открывающую скобку, мы добавляем ее в стек. Если мы встречаем закрывающую скобку, мы проверяем, что последняя добавленная скобка в стеке соответствует этой закрывающей скобке. Если да, то мы удаляем эту открывающую скобку из стека. Если нет, то скобочная последовательность неправильная. По завершении проверки мы проверяем, что стек пустой. Если стек не пустой, значит скобочная последовательность неправильная.
+// 3. Задачка на Map Задачка: Подсчет количества повторений символов в строке
+// Описание задачи: Написать программу, которая будет подсчитывать количество повторений каждого символа в заданной СТРОКЕ.
+// Результат необходимо вывести в виде пар "символ - количество повторений".
+//Пример: Для строки "hello world" результат должен быть следующим:
+//h - 1
+//e - 1
+//l - 3
+//o - 2
+//  - 1
+//w - 1
+//r - 1
+//d - 1
+// Подсказка: Мы используем HashMap, чтобы подсчитать количество повторений каждого символа в заданной строке. Мы проходим по строке и для каждого символа проверяем, есть ли он уже в HashMap. Если да, то мы увеличиваем счетчик на 1. Если нет, то мы добавляем символ в HashMap со значением 1. После этого мы выводим все символы и их количество повторений с помощью методов keySet() и get() HashMap.
 public class Main {
 
     public static void main(String[] args) {
-        String bracet1 = new String("([{}])");
-        String bracet2 = new String("([{");
-        String bracet3 = new String("([{)]}");
-        String[] braket1Array = bracet1.split("");
-        String[] braket2Array = bracet2.split("");
-        String[] braket3Array = bracet3.split("");
-
-        System.out.println("Последовательность " + Arrays.toString(braket1Array) + " " + checkBracketPair(braket1Array));
-        System.out.println("Последовательность " + Arrays.toString(braket2Array) + " " + checkBracketPair(braket2Array));
-        System.out.print("Последовательность " + Arrays.toString(braket3Array) + " " + checkBracketPair(braket3Array));
+        String str1 = new String("Hello itgirls");
+        String str2 = new String("its phrase for checking");
+        String[] str1Arr = str1.split("");
+        String[] str2Arr = str2.split("");
+        //repetitionsOfCharacters(str1Arr);
+        //repetitionsOfCharacters(str2Arr);
     }
 
-    public static String checkBracketPair(String[] braketArray) {
-        Stack<String> deck = new Stack<>();
-        int ln = braketArray.length;
+    public static void repetitionsOfCharacters(String[] strArr) {
+        HashMap<Character, Integer> charCountMap = new HashMap<>();
+        int ln = strArr.length;
         for (int i = 0; i < ln; i++) {
-            switch (braketArray[i]) {
-                case "(", "[", "{" -> deck.push(braketArray[i]); // если это открывающаяся скобка, добавить в ее стек
-                case ")" -> { // если закрывающая скобка, то проверяем пару
-                    if (deck.peek().equals("(")) {
-                        deck.pop(); // если пара правильная, стираем скобку из стека
-                    } else return "Последовательность НЕправильная";
-                }
-                case "]" -> {
-                    if (deck.peek().equals("[")) {
-                        deck.pop(); // если пара правильная, стираем скобку из стека
-                    } else return "Последовательность НЕправильная";
-                }
-                case "}" -> {
-                    if (deck.peek().equals("{")) {
-                        deck.pop(); // если пара правильная, стираем скобку из стека
-                    } else return "Последовательность НЕправильная";
-                }
-                default -> {
-                    return "Есть символы не-скобки";
-                }
-            }
+            //charCountMap.put(strArr.toString(i), 1);
         }
-        return deck.empty() ? "Последовательность Правильная" : "Последовательность НЕправильная";
+        for (Character key : charCountMap.keySet()) {
+            System.out.println(key + " - " + charCountMap.get(key));
+        }
     }
 }
